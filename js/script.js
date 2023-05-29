@@ -37,11 +37,12 @@ function renderList(actionForButton){
 		// creating div element for movie card and setting class and id to it
 		let moviesSlot = document.createElement('div');
 		moviesSlot.classList.add("movie-card");
-    let favMovieList = JSON.parse(localStorage.getItem("myFavourite"));
-		
-		var redHeartClass ="";
-		if(favMovieList.find(element => element == moviesList[i].imdbID)){
-				var redHeartClass = "red";
+		if(localStorage.getItem("myFavourite24")) {
+	    let favMovieList = JSON.parse(localStorage.getItem("myFavourite24"));
+			var redHeartClass ="";
+			if(favMovieList.find(element => element == moviesList[i].imdbID)){
+					var redHeartClass = "red";
+			}
 		}
 		moviesSlot.innerHTML = `<div class="grid_4">
           <div class="box">
@@ -129,8 +130,8 @@ getMoviesFromRecentSearch();
 function favourite(element){
 	var movieId = element.getAttribute('data-id');
 
-  if( localStorage.getItem("myFavourite")) {
-		let favMovieList = JSON.parse(localStorage.getItem("myFavourite"));
+  if( localStorage.getItem("myFavourite24")) {
+		let favMovieList = JSON.parse(localStorage.getItem("myFavourite24"));
 
 		if(favMovieList.find(element => element == movieId)) {
 			const index = favMovieList.indexOf(movieId);
@@ -138,25 +139,25 @@ function favourite(element){
 			  favMovieList.splice(index, 1);  
 			}
 			element.classList.remove("red");
-			localStorage.setItem("myFavourite", JSON.stringify(favMovieList));
+			localStorage.setItem("myFavourite24", JSON.stringify(favMovieList));
 		}	
 		else{
 			favMovieList.push(movieId);
 			element.classList.add("red");
-			localStorage.setItem("myFavourite", JSON.stringify(favMovieList));
+			localStorage.setItem("myFavourite24", JSON.stringify(favMovieList));
 		}
 	}
 	else{
 			favMovieList = new Array();
 			favMovieList = [movieId];
-			localStorage.setItem("myFavourite", JSON.stringify(favMovieList));
+			localStorage.setItem("myFavourite24", JSON.stringify(favMovieList));
 	}
 }
 
 
 
 function listFavouriteMovieList() {
-	var favMovieList = JSON.parse(localStorage.getItem("myFavourite"));
+	var favMovieList = JSON.parse(localStorage.getItem("myFavourite24"));
 	reponseData = new Array();
 
 	if(favMovieList != null) {
@@ -196,9 +197,9 @@ function renderfavList(action){
 function remove_favourite(element) {
 
 	var movieId = element.getAttribute('data-id');
-	var favMovieList = JSON.parse(localStorage.getItem("myFavourite"));
+	var favMovieList = JSON.parse(localStorage.getItem("myFavourite24"));
   
-  if( localStorage.getItem("myFavourite")) {
+  if( localStorage.getItem("myFavourite24")) {
 		if(favMovieList.find(element => element == movieId)) {
 			const index = favMovieList.indexOf(movieId);
 
@@ -206,7 +207,7 @@ function remove_favourite(element) {
 			  favMovieList.splice(index, 1);  // 2nd parameter means remove one item only
 
 			}
-			localStorage.setItem("myFavourite", JSON.stringify(favMovieList));
+			localStorage.setItem("myFavourite24", JSON.stringify(favMovieList));
 		}	
 	}
 
